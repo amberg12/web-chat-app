@@ -15,7 +15,7 @@ lazy_static! {
 }
 
 fn tera_instance() -> Tera {
-    match Tera::new("static/*.html.tera") {
+    match Tera::new("static/*.html") {
         Ok(t) => t,
         Err(e) => {
             println!("Parsing error(s): {}", e);
@@ -27,7 +27,7 @@ fn tera_instance() -> Tera {
 #[get("/")]
 pub fn home() -> RawHtml<String> {
     let context = Context::new();
-    let rendered = TEMPLATES.render("index.html.tera", &context);
+    let rendered = TEMPLATES.render("index.html", &context);
     
     match rendered {
         Ok(file_content) => RawHtml(file_content),
