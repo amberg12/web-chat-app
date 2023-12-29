@@ -1,10 +1,10 @@
-use rocket::*;
-use rocket::response::content::RawHtml;
-
-use tera::Tera;
-use tera::Context;
-
 use lazy_static::lazy_static;
+use rocket::fs::NamedFile;
+use rocket::response::content::RawHtml;
+use rocket::*;
+use std::path::{Path, PathBuf};
+use tera::Context;
+use tera::Tera;
 
 lazy_static! {
     pub static ref TEMPLATES: Tera = {
@@ -24,13 +24,18 @@ fn tera_instance() -> Tera {
     }
 }
 
+/* WEBPAGE routes */
 #[get("/")]
 pub fn home() -> RawHtml<String> {
     let context = Context::new();
     let rendered = TEMPLATES.render("index.html", &context);
-    
     match rendered {
-        Ok(file_content) => RawHtml(file_content),
-        Err(_) => RawHtml("Page not found.".to_string()),
+        Ok(c) => RawHtml(c),
+        Err(e) => RawHtml(format!("Page not found. Error: {}", e)),
     }
+}
+
+#[get("/<file..>")]
+pub async fn file_server(file: PathBuf) -> Option<NamedFile> {
+    NamedFile::open(Path::new("static/").join(file)).await.ok()
 }
