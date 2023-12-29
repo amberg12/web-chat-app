@@ -1,12 +1,20 @@
-#[macro_use] extern crate rocket;
+use std::fs;
 
-#[get("/world")]
-fn world() -> &'static str {
-    "Hello, world!"
+use rocket::*;
+use rocket::response::content::RawHtml;
+
+#[get("/")]
+fn world() -> RawHtml<String> {
+    let contents = fs::read_to_string("static/index.html");
+    match contents {
+        Ok(file_content) => RawHtml(file_content),
+        Err(_) => RawHtml("Page not found.".to_string()),
+    }
+    
 }
 
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/hello", routes![world])
+        .mount("/", routes![world])
 }
