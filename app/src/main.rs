@@ -5,5 +5,5 @@ mod routes;
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/", routes![routes::world])
+        .mount("/", routes![routes::home])
 }

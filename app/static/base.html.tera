@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <title>{% block title %}{% endblock title %}My Webpage!</title>
+    {% endblock head %}
+  </head>
+  <body>
+    <div id="content">{% block content %}this is where the content should be.{% endblock content %}</div>
+    <div id="footer">
+      <br>
+      <p>this is a footer</p>
+    </div>
+  </body>
+</html>
