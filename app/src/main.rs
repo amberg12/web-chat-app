@@ -1,20 +1,9 @@
-use std::fs;
-
 use rocket::*;
-use rocket::response::content::RawHtml;
 
-#[get("/")]
-fn world() -> RawHtml<String> {
-    let contents = fs::read_to_string("static/index.html");
-    match contents {
-        Ok(file_content) => RawHtml(file_content),
-        Err(_) => RawHtml("Page not found.".to_string()),
-    }
-    
-}
+mod routes;
 
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/", routes![world])
+        .mount("/", routes![routes::world])
 }
