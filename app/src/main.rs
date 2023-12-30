@@ -1,5 +1,7 @@
 use rocket::*;
-mod routes;
+
+pub mod models;
+pub mod routes;
 
 #[launch]
 fn rocket() -> _ {

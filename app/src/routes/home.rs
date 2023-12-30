@@ -1,4 +1,4 @@
-use ::serde::Serialize;
+use crate::models::message::Message;
 use lazy_static::lazy_static;
 use rocket::response::content::RawHtml;
 use rocket::*;
@@ -20,12 +20,6 @@ lazy_static! {
         let tera = tera_instance();
         tera
     };
-}
-
-#[derive(Serialize, Debug, FromForm)]
-struct Message {
-    author: String,
-    content: String,
 }
 
 /* WEBPAGE routes */
