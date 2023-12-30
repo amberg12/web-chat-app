@@ -1,10 +1,21 @@
 use rocket::*;
 
+pub mod database;
 pub mod models;
 pub mod routes;
 
 #[launch]
-fn rocket() -> _ {
+async fn rocket() -> _ {
+    let db = match database::init::init_db().await {
+        Ok(r) => r,
+        Err(e) => panic!("error: {}", e),
+    };
+
+    match database::init::create_tables(&db).await {
+        Ok(_) => (),
+        Err(e) => panic!("error: {}", e),
+    }
+
     rocket::build()
         .mount(
             "/",

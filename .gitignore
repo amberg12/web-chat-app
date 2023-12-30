@@ -13,4 +13,5 @@ Cargo.lock
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
 
+# VS code setting files should be based on what the runner wants
 .vscode
