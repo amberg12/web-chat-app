@@ -17,7 +17,7 @@ fn tera_instance() -> Tera {
 
 lazy_static! {
     pub static ref TEMPLATES: Tera = {
-        let mut tera = tera_instance();
+        let tera = tera_instance();
         tera
     };
 }
