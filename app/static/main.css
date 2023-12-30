@@ -14,6 +14,8 @@ body {
 .message-box {
     overflow-y: scroll;
     max-height: 80vh; 
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .message {
@@ -33,4 +35,11 @@ body {
 .message-content {
     color: aliceblue;
     margin: 10px;
+}
+
+.centred {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }

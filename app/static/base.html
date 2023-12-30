@@ -8,10 +8,11 @@
   </head>
   <body>
     <div id="content" class="content">{% block content %}this is where the content should be.{% endblock content %}</div>
-    <div id="footer">
+    <div id="footer" class="centred">
       <hr>
-      <p><a href="https://github.com/amberg12">Source Code</a></p>
-      <p id="jstest"></p>
+      <a href="https://github.com/amberg12">
+        <img src="static/GitHub_Logo_White.png" alt="Github" width="20%" height="20%"> 
+      </a>
       {% block script %}{% endblock script %}
     </div>
   </body>

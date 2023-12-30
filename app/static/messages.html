@@ -1,4 +1,4 @@
-{% for message in messages %}
+{% for message in messages|reverse %}
 <div class="message">
   <p>
     <span class="message-author">{{message.author}}</span><br/>
