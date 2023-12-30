@@ -17,7 +17,6 @@ Cargo.lock
 .vscode
 app/sqlite.db
 *.db
-*.db
 app/sqlite.db-shm
-app/sqlite.db
 app/sqlite.db-wal
+app/sqlite.db

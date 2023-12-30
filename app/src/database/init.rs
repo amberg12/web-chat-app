@@ -19,7 +19,7 @@ pub async fn create_tables(db: &SqlitePool) -> Result<SqliteQueryResult, sqlx::E
         "--sql
     CREATE TABLE IF NOT EXISTS messages
     (   
-        UID INTEGER PRIMARY KEY,
+        uid INTEGER PRIMARY KEY,
         time_stamp INTEGER,
         author VARCHAR(250),
         content VARCHAR(250)

@@ -2,6 +2,7 @@ use crate::models::message::Message;
 use lazy_static::lazy_static;
 use rocket::response::content::RawHtml;
 use rocket::*;
+use sqlx::SqlitePool;
 use tera::Context;
 use tera::Tera;
 
@@ -24,30 +25,22 @@ lazy_static! {
 
 /* WEBPAGE routes */
 #[get("/")]
-pub fn home() -> RawHtml<String> {
+pub async fn home(db: &rocket::State<SqlitePool>) -> RawHtml<String> {
     let mut context = Context::new();
     context.insert(
         "messages",
-        &vec![
-            Message {
-                author: "a".to_string(),
-                content: "hi".to_string(),
+        &match sqlx::query_as::<_, Message>("SELECT * FROM messages")
+            .fetch_all(db.inner())
+            .await
+        {
+            Ok(r) => r,
+            Err(e) => vec![Message {
+                author: "Error".to_string(),
+                content: e.to_string(),
+                uid: None,
                 time_stamp: 0,
-                uid: Some(2),
-            },
-            Message {
-                author: "b".to_string(),
-                content: "hi".to_string(),
-                time_stamp: 0,
-                uid: Some(2),
-            },
-            Message {
-                author: "c".to_string(),
-                content: "hi".to_string(),
-                time_stamp: 0,
-                uid: Some(2),
-            },
-        ],
+            }],
+        },
     );
     let rendered = TEMPLATES.render("index.html", &context);
     match rendered {

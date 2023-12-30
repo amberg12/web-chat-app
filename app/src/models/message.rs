@@ -1,12 +1,12 @@
-use sqlx::FromRow;
+use sqlx::{Decode, FromRow};
 use std::time::{SystemTime, UNIX_EPOCH};
 
-#[derive(Debug, rocket::form::FromForm, ::serde::Serialize, FromRow)]
+#[derive(Debug, rocket::form::FromForm, ::serde::Serialize, FromRow, Decode)]
 pub struct Message {
+    pub uid: Option<i64>,
+    pub time_stamp: i64,
     pub author: String,
     pub content: String,
-    pub time_stamp: u64,
-    pub uid: Option<u64>,
 }
 
 #[derive(Debug, rocket::form::FromForm, ::serde::Serialize, FromRow)]
@@ -25,7 +25,7 @@ impl From<FormMessage> for Message {
             time_stamp: SystemTime::now()
                 .duration_since(UNIX_EPOCH)
                 .expect("Time went backwards.")
-                .as_millis() as u64,
+                .as_millis() as i64,
             uid: None,
         }
     }
