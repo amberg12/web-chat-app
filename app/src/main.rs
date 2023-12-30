@@ -1,4 +1,5 @@
 use rocket::*;
+use sqlx::SqlitePool;
 
 pub mod database;
 pub mod models;
@@ -11,6 +12,7 @@ async fn rocket() -> _ {
         Err(e) => panic!("error: {}", e),
     };
 
+    // create all tables at startup since needed at anypoint after.
     match database::init::create_tables(&db).await {
         Ok(_) => (),
         Err(e) => panic!("error: {}", e),
@@ -22,4 +24,5 @@ async fn rocket() -> _ {
             routes![routes::home::home, routes::message::message_receive],
         )
         .mount("/static", routes![routes::file::file_server])
+        .manage::<SqlitePool>(db)
 }

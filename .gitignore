@@ -15,3 +15,9 @@ Cargo.lock
 
 # VS code setting files should be based on what the runner wants
 .vscode
+app/sqlite.db
+*.db
+*.db
+app/sqlite.db-shm
+app/sqlite.db
+app/sqlite.db-wal

@@ -32,14 +32,20 @@ pub fn home() -> RawHtml<String> {
             Message {
                 author: "a".to_string(),
                 content: "hi".to_string(),
+                time_stamp: 0,
+                uid: Some(2),
             },
             Message {
                 author: "b".to_string(),
                 content: "hi".to_string(),
+                time_stamp: 0,
+                uid: Some(2),
             },
             Message {
                 author: "c".to_string(),
                 content: "hi".to_string(),
+                time_stamp: 0,
+                uid: Some(2),
             },
         ],
     );

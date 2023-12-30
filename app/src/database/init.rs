@@ -16,12 +16,12 @@ pub async fn init_db() -> Result<SqlitePool, sqlx::Error> {
 
 pub async fn create_tables(db: &SqlitePool) -> Result<SqliteQueryResult, sqlx::Error> {
     sqlx::query(
-        "
+        "--sql
     CREATE TABLE IF NOT EXISTS messages
     (   
         UID INTEGER PRIMARY KEY,
-        timestamp INTEGER,
-        name VARCHAR(250),
+        time_stamp INTEGER,
+        author VARCHAR(250),
         content VARCHAR(250)
     )
     ",
