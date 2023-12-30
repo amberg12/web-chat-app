@@ -5,7 +5,7 @@ function fetchAndUpdate() {
             return response.text();
         })
         .then(htmlContent => {
-            document.getElementById("messages").innerHTML = htmlContent;
+            document.getElementById("message-box").innerHTML = htmlContent;
         })
         .catch(error => {
             console.error('Error fetching HTML:', error);

@@ -1,3 +1,9 @@
 {% for message in messages %}
-  <p>{{message.author}}: {{message.content}}</p>
+<div class="message">
+  <p>
+    <span class="message-author">{{message.author}}</span><br/>
+    <span class="message-content">{{message.content}}</span> 
+  </p>
+</div>
+  
 {% endfor %}
