@@ -4,6 +4,7 @@ use sqlx::SqlitePool;
 pub mod database;
 pub mod models;
 pub mod routes;
+pub mod templates;
 
 #[launch]
 async fn rocket() -> _ {
@@ -21,7 +22,11 @@ async fn rocket() -> _ {
     rocket::build()
         .mount(
             "/",
-            routes![routes::home::home, routes::message::message_receive],
+            routes![
+                routes::home::home,
+                routes::message::message_receive,
+                routes::message::message_send
+            ],
         )
         .mount("/static", routes![routes::file::file_server])
         .manage::<SqlitePool>(db)
